@@ -1,8 +1,6 @@
 #!/bin/sh
 
-if [ "$(echo | nc localhost 10024)" = '220 [127.0.0.1] ESMTP amavisd-new service ready' ]; then
-	echo "extended hello successful"
-else
-	echo "extended hello failed"
-	exit 1
-fi
+case "$(echo | nc localhost 10024)" in
+  "220"*" ready"*)  echo "extended hello successful" ;;
+  *)                echo "extended hello failed" && exit 1 ;;
+esac
