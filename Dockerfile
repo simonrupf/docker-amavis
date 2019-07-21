@@ -23,7 +23,7 @@ RUN razor-admin -create && \
     razor-admin -register
 
 EXPOSE 10024/tcp
-VOLUME /var/amavis /var/lib/spamassassin /tmp
+VOLUME /etc/mail/spamassassin /var/amavis /var/lib/spamassassin /tmp
 
 CMD start.sh
 HEALTHCHECK CMD health.sh
