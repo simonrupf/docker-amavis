@@ -1,0 +1,38 @@
+diff -u /etc/amavisd.conf /usr/local/bin//amavisd.conf 
+--- /etc/amavisd.conf
++++ /usr/local/bin//amavisd.conf
+@@ -50,7 +50,7 @@
+ @local_domains_maps = ( [".$mydomain"] );  # list of all local domains
+ 
+ @mynetworks = qw( 127.0.0.0/8 [::1] [FE80::]/10 [FEC0::]/10
+-                  10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 );
++                  10.0.0.0/8 172.16.0.0/12 172.17/16 192.168.0.0/16 );
+ 
+ $unix_socketname = "$MYHOME/amavisd.sock";  # amavisd-release or amavis-milter
+                # option(s) -p overrides $inet_socket_port and $unix_socketname
+@@ -149,7 +149,8 @@
+ 
+ # OTHER MORE COMMON SETTINGS (defaults may suffice):
+ 
+-# $myhostname = 'host.example.com';  # must be a fully-qualified domain name!
++$myhostname = `hostname -d`;
++@inet_acl = qw( 0/0 );
+ 
+ # $notify_method  = 'smtp:[127.0.0.1]:10025';
+ # $forward_method = 'smtp:[127.0.0.1]:10025';  # set to undef with milter!
+@@ -380,10 +381,10 @@
+ # settings for the SAVAPI3.conf: ArchiveScan=1, HeurLevel=2, MailboxScan=1
+ 
+ # ### http://www.clamav.net/
+-# ['ClamAV-clamd',
+-#   \&ask_daemon, ["CONTSCAN {}\n", "/var/run/clamav/clamd.sock"],
+-#   qr/\bOK$/m, qr/\bFOUND$/m,
+-#   qr/^.*?: (?!Infected Archive)(.*) FOUND$/m ],
++['ClamAV-clamd',
++  \&ask_daemon, ["CONTSCAN {}\n", "clamd:3310"],
++  qr/\bOK$/m, qr/\bFOUND$/m,
++  qr/^.*?: (?!Infected Archive)(.*) FOUND$/m ],
+ # # NOTE: run clamd under the same user as amavisd - or run it under its own
+ # #   uid such as clamav, add user clamav to the amavis group, and then add
+ # #   AllowSupplementaryGroups to clamd.conf;
+
