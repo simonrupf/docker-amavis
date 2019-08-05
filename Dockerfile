@@ -5,7 +5,7 @@ COPY src /usr/local/bin
 RUN apk add --no-cache amavisd-new razor perl-mail-spf spamassassin p7zip cabextract unrar && \
     # initialize spamassassin database
     sa-update -v && \
-    chown -R amavis:amavis /etc/mail/spamassassin && \
+    chown -R amavis:amavis /etc/mail/spamassassin /var/lib/spamassassin && \
     # patch to support newer spamassassin rules
     patch /usr/sbin/amavisd /usr/local/bin/*amavisd.patch && \
     # configure amavisd
@@ -17,7 +17,7 @@ WORKDIR /var/amavis
 USER amavis:amavis
 
 # Configure Razor
-RUN razor-admin -create && \
+RUN razor-admin -create -d && \
     sed -i -r 's/^(logfile[^=]*=).*$/\1 \/dev\/stdout/g' \
         /var/amavis/.razor/razor-agent.conf && \
     razor-admin -register
