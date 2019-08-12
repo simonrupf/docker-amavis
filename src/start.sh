@@ -8,7 +8,7 @@ done
 ) &
 BACKGROUND_TASKS="$!"
 
-amavisd foreground &
+amavisd -c /etc/amavisd.conf -c /etc/amavisd-local.conf foreground &
 BACKGROUND_TASKS="${BACKGROUND_TASKS} $!"
 
 while true; do

@@ -1,7 +1,7 @@
 diff -u /etc/amavisd.conf /usr/local/bin/amavisd.conf
 --- /etc/amavisd.conf
 +++ /usr/local/bin/amavisd.conf
-@@ -149,7 +149,9 @@
+@@ -149,10 +149,12 @@
  
  # OTHER MORE COMMON SETTINGS (defaults may suffice):
  
@@ -10,8 +10,13 @@ diff -u /etc/amavisd.conf /usr/local/bin/amavisd.conf
 +$inet_socket_bind = '0';
 +@inet_acl = qw( 0/0 );
  
- # $notify_method  = 'smtp:[127.0.0.1]:10025';
- # $forward_method = 'smtp:[127.0.0.1]:10025';  # set to undef with milter!
+-# $notify_method  = 'smtp:[127.0.0.1]:10025';
+-# $forward_method = 'smtp:[127.0.0.1]:10025';  # set to undef with milter!
++$notify_method  = "smtp:[$ENV{POSTFIX_HOSTNAME}]:10025";
++$forward_method  = "smtp:[$ENV{POSTFIX_HOSTNAME}]:10025";
+ 
+ # $final_virus_destiny      = D_DISCARD;
+ # $final_banned_destiny     = D_DISCARD;
 @@ -380,10 +381,10 @@
  # settings for the SAVAPI3.conf: ArchiveScan=1, HeurLevel=2, MailboxScan=1
  
