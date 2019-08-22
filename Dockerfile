@@ -4,7 +4,7 @@ ENV POSTFIX_HOSTNAME postfix
 
 COPY src /usr/local/bin
 
-RUN apk add --no-cache amavisd-new razor perl-mail-spf perl-dbd-mysql spamassassin p7zip cabextract unrar && \
+RUN apk add --no-cache amavisd-new razor perl-mail-spf perl-dbd-mysql spamassassin p7zip cabextract unrar tzdata && \
     # initialize spamassassin database
     sa-update -v && \
     chown -R amavis:amavis /etc/mail/spamassassin /var/lib/spamassassin && \
