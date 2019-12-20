@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.11
 
 ENV POSTFIX_HOSTNAME postfix
 
@@ -8,10 +8,8 @@ RUN apk add --no-cache amavisd-new razor perl-mail-spf perl-dbd-mysql spamassass
     # initialize spamassassin database
     sa-update -v && \
     chown -R amavis:amavis /etc/mail/spamassassin /var/lib/spamassassin && \
-    # patch to support newer spamassassin rules
-    patch /usr/sbin/amavisd /usr/local/bin/*amavisd.patch && \
     # configure amavisd
-    patch /etc/amavisd.conf /usr/local/bin/*amavisd.conf.patch && \
+    patch /etc/amavisd.conf /usr/local/bin/amavisd.conf.patch && \
     echo "1;" > /etc/amavisd-local.conf && \
     chmod o+r /etc/amavisd.conf && \
     rm /usr/local/bin/*.patch
