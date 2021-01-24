@@ -1,6 +1,15 @@
-diff -u /etc/amavisd.conf /usr/local/bin/amavisd.conf
+diff -u /etc/amavisd.conf /tmp/amavisd.conf
 --- /etc/amavisd.conf
-+++ /usr/local/bin/amavisd.conf
++++ /tmp/amavisd.conf
+@@ -44,7 +44,7 @@
+ $syslog_facility = 'mail';   # Syslog facility as a string
+            # e.g.: mail, daemon, user, local0, ... local7
+ 
+-$enable_db = 1;              # enable use of BerkeleyDB/libdb (SNMP and nanny)
++$enable_db = 0;              # enable use of BerkeleyDB/libdb (SNMP and nanny)
+ # $enable_zmq = 1;           # enable use of ZeroMQ (SNMP and nanny)
+ $nanny_details_level = 2;    # nanny verbosity: 1: traditional, 2: detailed
+ $enable_dkim_verification = 1;  # enable DKIM signatures verification
 @@ -149,10 +149,12 @@
  
  # OTHER MORE COMMON SETTINGS (defaults may suffice):

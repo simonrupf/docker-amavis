@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 ENV POSTFIX_HOSTNAME postfix
 
@@ -13,7 +13,7 @@ RUN apk upgrade --no-cache && \
     patch /etc/amavisd.conf /usr/local/bin/amavisd.conf.patch && \
     echo "1;" > /etc/amavisd-local.conf && \
     chmod o+r /etc/amavisd.conf && \
-    rm /usr/local/bin/*.patch && \
+    rm /usr/local/bin/*.patch /etc/*.orig && \
     apk del --no-cache patch
 
 WORKDIR /var/amavis
