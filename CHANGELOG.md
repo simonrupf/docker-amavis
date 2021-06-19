@@ -1,10 +1,13 @@
 # amavis change log
 
+## 0.3.6
+update to Alpine 3.14 / spamassassin 3.4.6
+
 ## 0.3.5
-update to Alpine 3.13 / amavis 2.12.1 / handling removal of BerkeleyDB in Alpine
+update to Alpine 3.13 / amavis 2.12.1 / openssl 1.1.1k / handling removal of BerkeleyDB in Alpine
 
 ## 0.3.4
-update to Alpine 3.12 / package renaming and dependencies
+update to Alpine 3.12 / spamassassin 3.4.5 / package renaming and dependencies
 
 ## 0.3.3
 update to openssl 1.1.1g

@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.14
 
 ENV POSTFIX_HOSTNAME postfix
 
@@ -10,6 +10,7 @@ RUN apk upgrade --no-cache && \
     sa-update -v && \
     chown -R amavis:amavis /etc/mail/spamassassin /var/lib/spamassassin && \
     # configure amavisd
+    mv /usr/sbin/amavisd.conf /etc/amavisd.conf && \
     patch /etc/amavisd.conf /usr/local/bin/amavisd.conf.patch && \
     echo "1;" > /etc/amavisd-local.conf && \
     chmod o+r /etc/amavisd.conf && \
