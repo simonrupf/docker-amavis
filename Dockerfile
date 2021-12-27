@@ -1,16 +1,16 @@
-FROM alpine:3.14
+FROM alpine:3.15
 
 ENV POSTFIX_HOSTNAME postfix
 
 COPY src /usr/local/bin
 
 RUN apk upgrade --no-cache && \
-    apk add --no-cache amavis cabextract p7zip patch perl-mail-spf perl-dbd-mysql razor spamassassin tzdata unrar && \
+    apk add --no-cache amavis cabextract p7zip patch perl-dbd-mysql \
+        perl-io-socket-ssl perl-mail-spf razor spamassassin tzdata && \
     # initialize spamassassin database
     sa-update -v && \
     chown -R amavis:amavis /etc/mail/spamassassin /var/lib/spamassassin && \
     # configure amavisd
-    mv /usr/sbin/amavisd.conf /etc/amavisd.conf && \
     patch /etc/amavisd.conf /usr/local/bin/amavisd.conf.patch && \
     echo "1;" > /etc/amavisd-local.conf && \
     chmod o+r /etc/amavisd.conf && \

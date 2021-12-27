@@ -1,5 +1,9 @@
 # amavis change log
 
+## 0.3.7
+update to Alpine 3.15 / amavis 2.12.2 / openssl 1.1.1l
+removal of unrar, see https://gitlab.alpinelinux.org/alpine/aports/-/merge_requests/26234
+
 ## 0.3.6
 update to Alpine 3.14 / spamassassin 3.4.6
 
