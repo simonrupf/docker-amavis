@@ -21,7 +21,7 @@ jobs:
           VERSION=${GITHUB_REF##*/}
           echo ::set-output name=buildx_args::--tag ${IMAGE}:latest \
             --tag ${IMAGE}:${VERSION} \
-            --platform linux/amd64,linux/386,${QEMU_PLATFORMS} .
+            --platform linux/amd64,${QEMU_PLATFORMS} .
           echo ::set-output name=qemu_platforms::${QEMU_PLATFORMS}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
