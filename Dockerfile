@@ -1,11 +1,15 @@
-FROM alpine:3.17
+FROM alpine:3.18
+
+LABEL org.opencontainers.image.authors="Simon Rupf <simon@rupf.net>" \
+      org.opencontainers.image.source=https://github.com/simonrupf/docker-amavis \
+      org.opencontainers.image.version="${VERSION}"
 
 ENV POSTFIX_HOSTNAME postfix
 
 COPY src /usr/local/bin
 
 RUN apk upgrade --no-cache && \
-    apk add --no-cache amavis cabextract p7zip patch perl-dbd-mysql \
+    apk add --no-cache amavis cabextract 7zip patch perl-dbd-mysql \
         perl-io-socket-ssl perl-mail-spf razor spamassassin tzdata && \
     # initialize spamassassin database
     sa-update -v && \
@@ -14,7 +18,7 @@ RUN apk upgrade --no-cache && \
     patch /etc/amavisd.conf /usr/local/bin/amavisd.conf.patch && \
     echo "1;" > /etc/amavisd-local.conf && \
     chmod o+r /etc/amavisd.conf && \
-    rm /usr/local/bin/*.patch /etc/*.orig && \
+    rm /usr/local/bin/*.patch && \
     apk del --no-cache patch
 
 WORKDIR /var/amavis

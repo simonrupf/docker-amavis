@@ -1,5 +1,9 @@
 # amavis change log
 
+## 0.3.10
+update to Alpine 3.18 / amavis 2.13.0 / openssl 3.1.0
+7zip replaces p7zip, which was originally a fork of the former, but now less maintained
+
 ## 0.3.9
 update to Alpine 3.17 / openssl 3.0.7
 

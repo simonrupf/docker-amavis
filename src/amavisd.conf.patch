@@ -1,7 +1,6 @@
-diff -u /etc/amavisd.conf /tmp/amavisd.conf
 --- /etc/amavisd.conf
 +++ /tmp/amavisd.conf
-@@ -149,10 +149,12 @@
+@@ -165,10 +165,12 @@
  
  # OTHER MORE COMMON SETTINGS (defaults may suffice):
  
@@ -17,19 +16,20 @@ diff -u /etc/amavisd.conf /tmp/amavisd.conf
  
  # $final_virus_destiny      = D_DISCARD;
  # $final_banned_destiny     = D_DISCARD;
-@@ -380,10 +381,10 @@
- # settings for the SAVAPI3.conf: ArchiveScan=1, HeurLevel=2, MailboxScan=1
- 
- # ### http://www.clamav.net/
+@@ -812,11 +814,11 @@
+ # You may also have to adjust the path to the clamd communication
+ # socket to match your system. The path is usually defined in the file
+ # /etc/clamd.conf, or may be controlled by your service manager / init.
+-#
 -# ['ClamAV-clamd',
 -#   \&ask_daemon, ["CONTSCAN {}\n", "/var/run/clamav/clamd.sock"],
 -#   qr/\bOK$/m, qr/\bFOUND$/m,
 -#   qr/^.*?: (?!Infected Archive)(.*) FOUND$/m ],
-+['ClamAV-clamd',
-+  \&ask_daemon, ["CONTSCAN {}\n", "clamd:3310"],
-+  qr/\bOK$/m, qr/\bFOUND$/m,
-+  qr/^.*?: (?!Infected Archive)(.*) FOUND$/m ],
- # # NOTE: run clamd under the same user as amavisd - or run it under its own
- # #   uid such as clamav, add user clamav to the amavis group, and then add
- # #   AllowSupplementaryGroups to clamd.conf;
-
++
++  ['ClamAV-clamd',
++    \&ask_daemon, ["CONTSCAN {}\n", "clamd:3310"],
++    qr/\bOK$/m, qr/\bFOUND$/m,
++    qr/^.*?: (?!Infected Archive)(.*) FOUND$/m ],
+ 
+ # ['ClamAV-clamd-stream',
+ #   \&ask_daemon, ["*", 'clamd:/var/run/clamav/clamd.sock'],
