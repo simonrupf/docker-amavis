@@ -12,28 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Prepare
         id: prepare
         run: |
           IMAGE=simonrupf/amavis
           QEMU_PLATFORMS=linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           VERSION=${GITHUB_REF##*/}
-          echo ::set-output name=buildx_args::--tag ${IMAGE}:latest \
+          echo "buildx_args=--tag ${IMAGE}:latest \
             --tag ${IMAGE}:${VERSION} \
-            --platform linux/amd64,${QEMU_PLATFORMS} .
-          echo ::set-output name=qemu_platforms::${QEMU_PLATFORMS}
+            --platform linux/amd64,linux/386,${QEMU_PLATFORMS} ." >> $GITHUB_OUTPUT
+          echo "qemu_platforms=${QEMU_PLATFORMS}" >> $GITHUB_OUTPUT
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
         with:
           platforms: ${{ steps.prepare.outputs.qemu_platforms }}
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
         with:
           install: true
       - name: Docker Build
         run: |
-          docker build --no-cache --pull --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
+          docker build --no-cache --pull --output "type=image,push=false" --build-arg VERSION=${{ steps.prepare.outputs.version }} ${{ steps.prepare.outputs.buildx_args }}
       - name: Docker Login
         if: success() && github.event_name != 'pull_request' && github.ref != 'refs/heads/master'
         env:
