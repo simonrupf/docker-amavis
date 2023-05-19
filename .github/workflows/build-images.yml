@@ -21,7 +21,7 @@ jobs:
           VERSION=${GITHUB_REF##*/}
           echo "buildx_args=--tag ${IMAGE}:latest \
             --tag ${IMAGE}:${VERSION} \
-            --platform linux/amd64,linux/386,${QEMU_PLATFORMS} ." >> $GITHUB_OUTPUT
+            --platform linux/amd64,${QEMU_PLATFORMS} ." >> $GITHUB_OUTPUT
           echo "qemu_platforms=${QEMU_PLATFORMS}" >> $GITHUB_OUTPUT
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
       - name: Set up QEMU
