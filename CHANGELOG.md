@@ -1,5 +1,8 @@
 # amavis change log
 
+## 0.3.12
+update to Alpine 3.20 / openssl 3.3.0
+
 ## 0.3.11
 update to Alpine 3.19 / openssl 3.1.4
 
@@ -50,4 +53,3 @@ ensuring sa-update can write to databases, avoiding creation of razor log file
 
 ## 0.1.0
 initial packaging, patching alpines amavisd to support newer spamassassin rules
-
