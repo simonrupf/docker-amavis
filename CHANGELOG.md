@@ -1,5 +1,8 @@
 # amavis change log
 
+## 0.3.13
+update to Alpine 3.21 / openssl 3.3.2
+
 ## 0.3.12
 update to Alpine 3.20 / openssl 3.3.0
 
