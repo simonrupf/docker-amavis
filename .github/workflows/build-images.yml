@@ -17,7 +17,7 @@ jobs:
         id: prepare
         run: |
           IMAGE=simonrupf/amavis
-          QEMU_PLATFORMS=linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x,linux/riscv64
+          QEMU_PLATFORMS=linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x,linux/riscv64
           VERSION=${GITHUB_REF##*/}
           echo "buildx_args=--tag ${IMAGE}:latest \
             --tag ${IMAGE}:${VERSION} \
