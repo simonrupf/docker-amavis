@@ -1,10 +1,14 @@
 # amavis change log
 
+## 0.3.15
+update to Alpine 3.23 / amavis 2.14.0 / openssl 3.5.4 / spamassassin 4.0.2
+added lzip
+
 ## 0.3.14
 update to Alpine 3.22 / openssl 3.5.0
 
 ## 0.3.13
-update to Alpine 3.21 / openssl 3.3.2
+update to Alpine 3.21 / openssl 3.3.2 / spamassassin 4.0.1 / razor 2.86
 
 ## 0.3.12
 update to Alpine 3.20 / openssl 3.3.0

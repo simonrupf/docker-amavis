@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.23
 
 LABEL org.opencontainers.image.authors="Simon Rupf <simon@rupf.net>" \
       org.opencontainers.image.source=https://github.com/simonrupf/docker-amavis \
@@ -9,7 +9,7 @@ ENV POSTFIX_HOSTNAME postfix
 COPY src /usr/local/bin
 
 RUN apk upgrade --no-cache && \
-    apk add --no-cache amavis cabextract 7zip patch perl-dbd-mysql \
+    apk add --no-cache 7zip amavis cabextract lzip patch perl-dbd-mysql \
         perl-io-socket-ssl perl-mail-spf razor spamassassin tzdata && \
     # initialize spamassassin database
     sa-update -v && \
