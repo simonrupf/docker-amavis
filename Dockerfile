@@ -1,4 +1,4 @@
-FROM alpine:3.23
+FROM alpine:3.24
 
 LABEL org.opencontainers.image.authors="Simon Rupf <simon@rupf.net>" \
       org.opencontainers.image.source=https://github.com/simonrupf/docker-amavis \
